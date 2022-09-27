@@ -36,3 +36,55 @@ const reviews = [
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec accumsan sem, eget ultrices neque. Cras laoreet eros nisl, ut porttitor eros vulputate non. Mauris finibus, dui eget gravida aliquet, arcu mi fermentum sem, sit amet volutpat ligula neque quis eros. Nullam molestie lectus ipsum.',
     }
 ];
+
+const img = document.getElementById('person-img');
+const author = document.getElementById('author');
+const job = document.getElementById('job');
+const info = document.getElementById('info');
+
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const randomBtn = document.querySelector('.random-btn');
+
+let currentItem = 5;
+
+window.addEventListener('DOMContentLoaded', () => {
+    const item = reviews[currentItem];
+
+    img.src = item.img;
+    author.textContent = item.name;
+    job.textContent = item.job;
+    info.textContent = item.text;
+    ShowPerson();
+
+});
+
+function ShowPerson(person) {
+    const item = reviews[person];
+
+    img.src = item.img;
+    author.textContent = item.name;
+    job.textContent = item.job;
+    info.textContent = item.text;
+};
+
+nextBtn.addEventListener('click', () => {
+    currentItem++;
+    if(currentItem > reviews.length -1){
+        currentItem = 0;
+    };
+    ShowPerson(currentItem);
+});
+
+prevBtn.addEventListener('click', () => {
+    currentItem--;
+    if(currentItem < 0){
+        currentItem = reviews.length -1;
+    };
+    ShowPerson(currentItem);
+});
+
+randomBtn.addEventListener('click', () => {
+    currentItem = Math.floor(Math.random() * reviews.length);
+    ShowPerson(currentItem);
+});
